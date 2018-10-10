@@ -6,11 +6,19 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        C c = new C(name: 'c name')
+        C.withNewSession {
+            C.withNewTransaction {
+                C c = new C(name: 'c name')
 
-        if (c.validate()) {
-            c.save(flush: true)
+                println "c will be validated"
+                if (c.validate()) {
+                    println "c was validated"
+
+                    c.save(flush: true)
+                }
+            }
         }
+
 
     }
     def destroy = {
