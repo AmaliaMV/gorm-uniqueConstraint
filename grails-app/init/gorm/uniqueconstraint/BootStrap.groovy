@@ -24,8 +24,8 @@ class BootStrap {
 
                 C c1 = new C(name: sameName, anotherProperty: "c1")
 
-                if (c1.validate()) {
-                    println "object c1 passed the validation"
+                if (c1.validate()) {  // this should be false
+                    println "object c1 passed the validation" //this code shouldn't be executed
                     c1.save(flush: true)
                     println "object c1 saved"
                 }
@@ -34,7 +34,7 @@ class BootStrap {
                 assert objectPersisted.name == c.name
                 assert objectPersisted.anotherProperty == c.anotherProperty
 
-                objectPersisted = (C) A.findByName(sameName)
+                objectPersisted = (C) A.findByName(sameName)  // this should be found the same object, not null
                 assert objectPersisted.name == c.name
                 assert objectPersisted.anotherProperty == c.anotherProperty
             }
